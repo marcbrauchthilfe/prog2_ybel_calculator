@@ -2,7 +2,6 @@ package calculator;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.util.HashMap;
@@ -42,31 +41,25 @@ public class Calculator extends JFrame {
     private void setupOperationSelector() {
         operations = new HashMap<>();
         operations.put("Add", new Add());
-
-        // TODO
-        // Add a new operation "Sub" for the subtraction of two integers as an (instance of a) Java
-        // class (you have yet to write this class)
-
-        // TODO
-        // Add a new operation "Mul" for the multiplication of two integers as an anonymous class
-
-        // TODO
-        // Add a new operation "Div" for the division of two integers as a lambda expression
+        operations.put("Sub", new Sub());
+        operations.put(
+                "Mul",
+                new Operation() {
+                    @Override
+                    public int doOperation(int a, int b) {
+                        return a * b;
+                    }
+                });
+        operations.put("Div", (int a, int b) -> a / b);
 
         operationSelector = new JComboBox<>();
         operations.forEach((key, value) -> operationSelector.addItem(key));
-
-        // TODO
-        // Replace the anonymous class with a lambda expression
         operationSelector.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        try {
-                            result.setText("" + calculate());
-                        } catch (NumberFormatException ex) {
-                            System.out.println("Invalid input.");
-                        }
+                (ActionEvent e) -> {
+                    try {
+                        result.setText("" + calculate());
+                    } catch (NumberFormatException ex) {
+                        System.out.println("Invalid input");
                     }
                 });
     }

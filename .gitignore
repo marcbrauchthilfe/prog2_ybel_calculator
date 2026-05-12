@@ -56,7 +56,7 @@ replay_pid*
 .gradle/
 # don't ignore any gradle wrapper files
 !gradle/
-
+!gradle/wrapper/gradle-wrapper.jar
 
 # Packages #
 ############
@@ -66,3 +66,9 @@ replay_pid*
 *.zip
 *.tgz
 *.tar.gz
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Kotlin plugin data
+.kotlin
